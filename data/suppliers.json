@@ -1,0 +1,26 @@
+{
+    "SUP-001": {
+        "id": "SUP-001",
+        "name": "Supplier XYZ",
+        "reliability_score": 0.72,
+        "avg_lead_time_hours": 72,
+        "available": true,
+        "base_cost": 1.0
+    },
+    "SUP-002": {
+        "id": "SUP-002",
+        "name": "Supplier ABC",
+        "reliability_score": 0.89,
+        "avg_lead_time_hours": 24,
+        "available": true,
+        "base_cost": 1.15
+    },
+    "SUP-003": {
+        "id": "SUP-003",
+        "name": "Supplier FastTrack",
+        "reliability_score": 0.95,
+        "avg_lead_time_hours": 18,
+        "available": true,
+        "base_cost": 1.35
+    }
+}

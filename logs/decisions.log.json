@@ -1,0 +1,3226 @@
+[
+  {
+    "incident_id": "INC-SH-4429-1766875968319",
+    "timestamp": "2025-12-27T22:52:54.343Z",
+    "detection_time": "2025-12-27T22:52:48.319Z",
+    "resolution_time": "2025-12-27T22:52:54.343Z",
+    "elapsed_seconds": 6,
+    "disruption_type": "supplier_delay",
+    "severity": 72,
+    "decision_type": "AUTONOMOUS_INTERVENTION",
+    "projected_loss": 15300,
+    "recovery_cost": 2250,
+    "net_save": 13050,
+    "decision_chain": [
+      "Signal Monitor detected disruption: severity 72/100, SLA breach probability 100%",
+      "Root-Cause identified: supplier_delay - Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+      "Option Generator proposed 3 recovery alternatives",
+      "Auditor approved $6,885 recovery budget (projected loss: $15,300)",
+      "Negotiator selected OPT-SPLIT-001 at $2,250 (confidence: 0.83)"
+    ],
+    "human_interventions": 0,
+    "execution_status": "skipped_already_executed",
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T22:52:48.319Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T22:52:48.320Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T22:52:48.319Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "options": {
+        "timestamp": "2025-12-27T22:52:50.334Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T22:52:48.320Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T22:52:48.319Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "auditor": {
+        "timestamp": "2025-12-27T22:52:52.336Z",
+        "agent": "LossRecoveryAuditor",
+        "shipment_id": "SH-4429",
+        "financial_analysis": {
+          "sla_penalty": 6750,
+          "inventory_holding_cost": 1800,
+          "customer_churn_risk": 6750,
+          "projected_loss": 15300,
+          "max_recovery_budget": 6885,
+          "safety_margin": 0.45,
+          "min_viable_intervention": 1350
+        },
+        "budget_approved": 6885,
+        "action_recommendation": "INTERVENTION_JUSTIFIED",
+        "previous_data": {
+          "timestamp": "2025-12-27T22:52:50.334Z",
+          "agent": "OptionGenerator",
+          "shipment_id": "SH-4429",
+          "options": [
+            {
+              "option_id": "OPT-SUP-002",
+              "type": "alternate_supplier",
+              "supplier": {
+                "id": "SUP-002",
+                "name": "Supplier ABC",
+                "reliability_score": 0.89,
+                "avg_lead_time_hours": 24,
+                "available": true,
+                "base_cost": 1.15
+              },
+              "estimated_cost": 5175,
+              "delivery_hours": 24,
+              "reliability": 0.89
+            },
+            {
+              "option_id": "OPT-SUP-003",
+              "type": "alternate_supplier",
+              "supplier": {
+                "id": "SUP-003",
+                "name": "Supplier FastTrack",
+                "reliability_score": 0.95,
+                "avg_lead_time_hours": 18,
+                "available": true,
+                "base_cost": 1.35
+              },
+              "estimated_cost": 6075,
+              "delivery_hours": 18,
+              "reliability": 0.95
+            },
+            {
+              "option_id": "OPT-SPLIT-001",
+              "type": "split_shipment",
+              "estimated_cost": 2250,
+              "delivery_hours": 36,
+              "reliability": 0.85,
+              "details": "Partial fulfillment strategy"
+            }
+          ],
+          "options_count": 3,
+          "previous_data": {
+            "timestamp": "2025-12-27T22:52:48.320Z",
+            "agent": "RootCauseAnalyzer",
+            "shipment_id": "SH-4429",
+            "root_cause": "supplier_delay",
+            "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+            "confidence": 0.9,
+            "fallback_used": false,
+            "affected_supplier": {
+              "id": "SUP-001",
+              "name": "Supplier XYZ",
+              "reliability_score": 0.72,
+              "avg_lead_time_hours": 72,
+              "available": true,
+              "base_cost": 1
+            },
+            "original_carrier": "split_shipment",
+            "previous_data": {
+              "timestamp": "2025-12-27T22:52:48.319Z",
+              "agent": "SignalMonitor",
+              "shipment_id": "SH-4429",
+              "shipment": {
+                "shipment_id": "SH-4429",
+                "origin": "Shanghai Port",
+                "destination": "Los Angeles Warehouse",
+                "original_eta": "2025-01-05T14:00:00Z",
+                "current_eta": "2025-01-07T14:00:00.000Z",
+                "carrier": "split_shipment",
+                "value": 45000,
+                "sla_deadline": "2025-01-06T00:00:00Z",
+                "customer_id": "CUST-8821",
+                "status": "rerouted",
+                "supplier_id": "SUP-001"
+              },
+              "disruption_detected": true,
+              "delay_hours": 48,
+              "severity": 72,
+              "severity_breakdown": {
+                "eta_drift": 45,
+                "inventory_risk": 20,
+                "supplier_reliability": 7
+              },
+              "sla_breach_probability": 100,
+              "hours_until_sla": -38
+            }
+          }
+        }
+      },
+      "negotiator": {
+        "timestamp": "2025-12-27T22:52:54.342Z",
+        "agent": "Negotiator",
+        "shipment_id": "SH-4429",
+        "decision_type": "AUTONOMOUS_INTERVENTION",
+        "selected_option": {
+          "option_id": "OPT-SPLIT-001",
+          "type": "split_shipment",
+          "estimated_cost": 2250,
+          "delivery_hours": 36,
+          "reliability": 0.85,
+          "details": "Partial fulfillment strategy",
+          "withinBudget": true,
+          "meetsSla": true,
+          "confidence": 0.83,
+          "residualRisk": "2.25",
+          "riskScore": 0.15000000000000002,
+          "rejectionReason": null,
+          "negotiated_cost": 2250
+        },
+        "decision_confidence": 0.83,
+        "residual_sla_breach_risk": 2.25,
+        "rationale": "Selected split_shipment (Conf: 0.83) - Meets Budget & SLA.",
+        "all_options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89,
+            "withinBudget": true,
+            "meetsSla": true,
+            "confidence": 0.7,
+            "residualRisk": "1.21",
+            "riskScore": 0.10999999999999999,
+            "rejectionReason": null
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95,
+            "withinBudget": true,
+            "meetsSla": true,
+            "confidence": 0.67,
+            "residualRisk": "0.25",
+            "riskScore": 0.050000000000000044,
+            "rejectionReason": null
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy",
+            "withinBudget": true,
+            "meetsSla": true,
+            "confidence": 0.83,
+            "residualRisk": "2.25",
+            "riskScore": 0.15000000000000002,
+            "rejectionReason": null
+          }
+        ]
+      },
+      "treasurer": {
+        "timestamp": "2025-12-27T22:52:54.343Z",
+        "agent": "Treasurer",
+        "shipment_id": "SH-4429",
+        "execution_status": "skipped_already_executed",
+        "decision_type": "ALREADY_HANDLED",
+        "transaction": {
+          "transaction_id": "TX-1766862600672",
+          "timestamp": "2025-12-27T19:10:00.672Z",
+          "amount": 2057,
+          "source": "emergency_reserve",
+          "destination": "split_shipment",
+          "shipment_id": "SH-4429",
+          "approved_by": "LossRecoveryAuditor",
+          "executed_by": "Treasurer"
+        },
+        "previous_data": {
+          "timestamp": "2025-12-27T22:52:54.342Z",
+          "agent": "Negotiator",
+          "shipment_id": "SH-4429",
+          "decision_type": "AUTONOMOUS_INTERVENTION",
+          "selected_option": {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy",
+            "withinBudget": true,
+            "meetsSla": true,
+            "confidence": 0.83,
+            "residualRisk": "2.25",
+            "riskScore": 0.15000000000000002,
+            "rejectionReason": null,
+            "negotiated_cost": 2250
+          },
+          "decision_confidence": 0.83,
+          "residual_sla_breach_risk": 2.25,
+          "rationale": "Selected split_shipment (Conf: 0.83) - Meets Budget & SLA.",
+          "all_options": [
+            {
+              "option_id": "OPT-SUP-002",
+              "type": "alternate_supplier",
+              "supplier": {
+                "id": "SUP-002",
+                "name": "Supplier ABC",
+                "reliability_score": 0.89,
+                "avg_lead_time_hours": 24,
+                "available": true,
+                "base_cost": 1.15
+              },
+              "estimated_cost": 5175,
+              "delivery_hours": 24,
+              "reliability": 0.89,
+              "withinBudget": true,
+              "meetsSla": true,
+              "confidence": 0.7,
+              "residualRisk": "1.21",
+              "riskScore": 0.10999999999999999,
+              "rejectionReason": null
+            },
+            {
+              "option_id": "OPT-SUP-003",
+              "type": "alternate_supplier",
+              "supplier": {
+                "id": "SUP-003",
+                "name": "Supplier FastTrack",
+                "reliability_score": 0.95,
+                "avg_lead_time_hours": 18,
+                "available": true,
+                "base_cost": 1.35
+              },
+              "estimated_cost": 6075,
+              "delivery_hours": 18,
+              "reliability": 0.95,
+              "withinBudget": true,
+              "meetsSla": true,
+              "confidence": 0.67,
+              "residualRisk": "0.25",
+              "riskScore": 0.050000000000000044,
+              "rejectionReason": null
+            },
+            {
+              "option_id": "OPT-SPLIT-001",
+              "type": "split_shipment",
+              "estimated_cost": 2250,
+              "delivery_hours": 36,
+              "reliability": 0.85,
+              "details": "Partial fulfillment strategy",
+              "withinBudget": true,
+              "meetsSla": true,
+              "confidence": 0.83,
+              "residualRisk": "2.25",
+              "riskScore": 0.15000000000000002,
+              "rejectionReason": null
+            }
+          ]
+        }
+      },
+      "monitor": {
+        "timestamp": "2025-12-27T22:52:54.343Z",
+        "agent": "PostExecutionMonitor",
+        "shipment_id": "SH-4429",
+        "monitoring_status": "skipped",
+        "reason": "execution_failed",
+        "previous_data": {
+          "timestamp": "2025-12-27T22:52:54.343Z",
+          "agent": "Treasurer",
+          "shipment_id": "SH-4429",
+          "execution_status": "skipped_already_executed",
+          "decision_type": "ALREADY_HANDLED",
+          "transaction": {
+            "transaction_id": "TX-1766862600672",
+            "timestamp": "2025-12-27T19:10:00.672Z",
+            "amount": 2057,
+            "source": "emergency_reserve",
+            "destination": "split_shipment",
+            "shipment_id": "SH-4429",
+            "approved_by": "LossRecoveryAuditor",
+            "executed_by": "Treasurer"
+          },
+          "previous_data": {
+            "timestamp": "2025-12-27T22:52:54.342Z",
+            "agent": "Negotiator",
+            "shipment_id": "SH-4429",
+            "decision_type": "AUTONOMOUS_INTERVENTION",
+            "selected_option": {
+              "option_id": "OPT-SPLIT-001",
+              "type": "split_shipment",
+              "estimated_cost": 2250,
+              "delivery_hours": 36,
+              "reliability": 0.85,
+              "details": "Partial fulfillment strategy",
+              "withinBudget": true,
+              "meetsSla": true,
+              "confidence": 0.83,
+              "residualRisk": "2.25",
+              "riskScore": 0.15000000000000002,
+              "rejectionReason": null,
+              "negotiated_cost": 2250
+            },
+            "decision_confidence": 0.83,
+            "residual_sla_breach_risk": 2.25,
+            "rationale": "Selected split_shipment (Conf: 0.83) - Meets Budget & SLA.",
+            "all_options": [
+              {
+                "option_id": "OPT-SUP-002",
+                "type": "alternate_supplier",
+                "supplier": {
+                  "id": "SUP-002",
+                  "name": "Supplier ABC",
+                  "reliability_score": 0.89,
+                  "avg_lead_time_hours": 24,
+                  "available": true,
+                  "base_cost": 1.15
+                },
+                "estimated_cost": 5175,
+                "delivery_hours": 24,
+                "reliability": 0.89,
+                "withinBudget": true,
+                "meetsSla": true,
+                "confidence": 0.7,
+                "residualRisk": "1.21",
+                "riskScore": 0.10999999999999999,
+                "rejectionReason": null
+              },
+              {
+                "option_id": "OPT-SUP-003",
+                "type": "alternate_supplier",
+                "supplier": {
+                  "id": "SUP-003",
+                  "name": "Supplier FastTrack",
+                  "reliability_score": 0.95,
+                  "avg_lead_time_hours": 18,
+                  "available": true,
+                  "base_cost": 1.35
+                },
+                "estimated_cost": 6075,
+                "delivery_hours": 18,
+                "reliability": 0.95,
+                "withinBudget": true,
+                "meetsSla": true,
+                "confidence": 0.67,
+                "residualRisk": "0.25",
+                "riskScore": 0.050000000000000044,
+                "rejectionReason": null
+              },
+              {
+                "option_id": "OPT-SPLIT-001",
+                "type": "split_shipment",
+                "estimated_cost": 2250,
+                "delivery_hours": 36,
+                "reliability": 0.85,
+                "details": "Partial fulfillment strategy",
+                "withinBudget": true,
+                "meetsSla": true,
+                "confidence": 0.83,
+                "residualRisk": "2.25",
+                "riskScore": 0.15000000000000002,
+                "rejectionReason": null
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "incident_id": "INC-undefined-1766876269545",
+    "timestamp": "2025-12-27T22:57:57.577Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "FAILURE_INTERNAL",
+    "system_action": "System Error",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T22:57:49.545Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T22:57:49.545Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T22:57:49.546Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T22:57:49.545Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T22:57:53.553Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T22:57:49.546Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T22:57:49.545Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: System Error (FAILURE_INTERNAL)"
+    ],
+    "decision_type": "FAILURE_INTERNAL",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766876690235",
+    "timestamp": "2025-12-27T23:04:58.267Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "FAILURE_INTERNAL",
+    "system_action": "System Error",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:04:50.235Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:04:50.235Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:04:50.235Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:04:50.235Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:04:54.265Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:04:50.235Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:04:50.235Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: System Error (FAILURE_INTERNAL)"
+    ],
+    "decision_type": "FAILURE_INTERNAL",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766877195533",
+    "timestamp": "2025-12-27T23:13:23.557Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:13:15.533Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:13:15.533Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:13:15.533Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:13:15.533Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:13:19.541Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:13:15.533Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:13:15.533Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766877453407",
+    "timestamp": "2025-12-27T23:17:41.435Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:17:33.407Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:17:33.407Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:17:33.407Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:17:33.407Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:17:37.419Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:17:33.407Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:17:33.407Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766877473482",
+    "timestamp": "2025-12-27T23:18:01.517Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:17:53.482Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:17:53.482Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:17:53.482Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:17:53.482Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:17:57.494Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:17:53.482Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:17:53.482Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766877659209",
+    "timestamp": "2025-12-27T23:21:07.220Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:20:59.209Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:20:59.209Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:20:59.210Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:20:59.209Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:21:03.211Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:20:59.210Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:20:59.209Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766877970282",
+    "timestamp": "2025-12-27T23:26:18.300Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:26:10.282Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:26:10.282Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:26:10.282Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:26:10.282Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:26:14.295Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:26:10.282Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:26:10.282Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766878084692",
+    "timestamp": "2025-12-27T23:28:12.736Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:28:04.692Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:28:04.692Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:28:04.692Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:28:04.692Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:28:08.715Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:28:04.692Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:28:04.692Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766878507498",
+    "timestamp": "2025-12-27T23:35:15.515Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:35:07.498Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:35:07.498Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:35:07.498Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:35:07.498Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:35:11.504Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:35:07.498Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:35:07.498Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766878565676",
+    "timestamp": "2025-12-27T23:36:13.701Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:36:05.676Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:36:05.676Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:36:05.676Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:36:05.676Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:36:09.687Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:36:05.676Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:36:05.676Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766878683891",
+    "timestamp": "2025-12-27T23:38:11.915Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:38:03.891Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:38:03.891Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:38:03.891Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:38:03.891Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:38:07.896Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:38:03.891Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:38:03.891Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766878720033",
+    "timestamp": "2025-12-27T23:38:48.079Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:38:40.033Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:38:40.033Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:38:40.034Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:38:40.033Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:38:44.061Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:38:40.034Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:38:40.033Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  },
+  {
+    "incident_id": "INC-undefined-1766878942858",
+    "timestamp": "2025-12-27T23:42:30.896Z",
+    "incident_reality": "ACTIVE",
+    "guardrail_result": "ALLOWED",
+    "decision_outcome": "NO_ACTION_NO_OPTIONS",
+    "system_action": "No viable options generated (Optimization space exhausted)",
+    "confidence": 1,
+    "counterfactual_impact": "N/A",
+    "detection_time": "2025-12-27T23:42:22.858Z",
+    "elapsed_seconds": 8,
+    "full_trace": {
+      "signal": {
+        "timestamp": "2025-12-27T23:42:22.858Z",
+        "agent": "SignalMonitor",
+        "shipment_id": "SH-4429",
+        "shipment": {
+          "shipment_id": "SH-4429",
+          "origin": "Shanghai Port",
+          "destination": "Los Angeles Warehouse",
+          "original_eta": "2025-01-05T14:00:00Z",
+          "current_eta": "2025-01-07T14:00:00.000Z",
+          "carrier": "split_shipment",
+          "value": 45000,
+          "sla_deadline": "2025-01-06T00:00:00Z",
+          "customer_id": "CUST-8821",
+          "status": "rerouted",
+          "supplier_id": "SUP-001"
+        },
+        "disruption_detected": true,
+        "delay_hours": 48,
+        "severity": 72,
+        "severity_breakdown": {
+          "eta_drift": 45,
+          "inventory_risk": 20,
+          "supplier_reliability": 7
+        },
+        "sla_breach_probability": 100,
+        "hours_until_sla": -38
+      },
+      "root_cause": {
+        "timestamp": "2025-12-27T23:42:22.858Z",
+        "agent": "RootCauseAnalyzer",
+        "shipment_id": "SH-4429",
+        "root_cause": "supplier_delay",
+        "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+        "confidence": 0.9,
+        "fallback_used": false,
+        "affected_supplier": {
+          "id": "SUP-001",
+          "name": "Supplier XYZ",
+          "reliability_score": 0.72,
+          "avg_lead_time_hours": 72,
+          "available": true,
+          "base_cost": 1
+        },
+        "original_carrier": "split_shipment",
+        "previous_data": {
+          "timestamp": "2025-12-27T23:42:22.858Z",
+          "agent": "SignalMonitor",
+          "shipment_id": "SH-4429",
+          "shipment": {
+            "shipment_id": "SH-4429",
+            "origin": "Shanghai Port",
+            "destination": "Los Angeles Warehouse",
+            "original_eta": "2025-01-05T14:00:00Z",
+            "current_eta": "2025-01-07T14:00:00.000Z",
+            "carrier": "split_shipment",
+            "value": 45000,
+            "sla_deadline": "2025-01-06T00:00:00Z",
+            "customer_id": "CUST-8821",
+            "status": "rerouted",
+            "supplier_id": "SUP-001"
+          },
+          "disruption_detected": true,
+          "delay_hours": 48,
+          "severity": 72,
+          "severity_breakdown": {
+            "eta_drift": 45,
+            "inventory_risk": 20,
+            "supplier_reliability": 7
+          },
+          "sla_breach_probability": 100,
+          "hours_until_sla": -38
+        }
+      },
+      "guardrails_pre": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "options": {
+        "timestamp": "2025-12-27T23:42:26.881Z",
+        "agent": "OptionGenerator",
+        "shipment_id": "SH-4429",
+        "options": [
+          {
+            "option_id": "OPT-SUP-002",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-002",
+              "name": "Supplier ABC",
+              "reliability_score": 0.89,
+              "avg_lead_time_hours": 24,
+              "available": true,
+              "base_cost": 1.15
+            },
+            "estimated_cost": 5175,
+            "delivery_hours": 24,
+            "reliability": 0.89
+          },
+          {
+            "option_id": "OPT-SUP-003",
+            "type": "alternate_supplier",
+            "supplier": {
+              "id": "SUP-003",
+              "name": "Supplier FastTrack",
+              "reliability_score": 0.95,
+              "avg_lead_time_hours": 18,
+              "available": true,
+              "base_cost": 1.35
+            },
+            "estimated_cost": 6075,
+            "delivery_hours": 18,
+            "reliability": 0.95
+          },
+          {
+            "option_id": "OPT-SPLIT-001",
+            "type": "split_shipment",
+            "estimated_cost": 2250,
+            "delivery_hours": 36,
+            "reliability": 0.85,
+            "details": "Partial fulfillment strategy"
+          }
+        ],
+        "options_count": 3,
+        "previous_data": {
+          "timestamp": "2025-12-27T23:42:22.858Z",
+          "agent": "RootCauseAnalyzer",
+          "shipment_id": "SH-4429",
+          "root_cause": "supplier_delay",
+          "cause_details": "Supplier XYZ has reliability score of 0.72, delayed production by 48 hours",
+          "confidence": 0.9,
+          "fallback_used": false,
+          "affected_supplier": {
+            "id": "SUP-001",
+            "name": "Supplier XYZ",
+            "reliability_score": 0.72,
+            "avg_lead_time_hours": 72,
+            "available": true,
+            "base_cost": 1
+          },
+          "original_carrier": "split_shipment",
+          "previous_data": {
+            "timestamp": "2025-12-27T23:42:22.858Z",
+            "agent": "SignalMonitor",
+            "shipment_id": "SH-4429",
+            "shipment": {
+              "shipment_id": "SH-4429",
+              "origin": "Shanghai Port",
+              "destination": "Los Angeles Warehouse",
+              "original_eta": "2025-01-05T14:00:00Z",
+              "current_eta": "2025-01-07T14:00:00.000Z",
+              "carrier": "split_shipment",
+              "value": 45000,
+              "sla_deadline": "2025-01-06T00:00:00Z",
+              "customer_id": "CUST-8821",
+              "status": "rerouted",
+              "supplier_id": "SUP-001"
+            },
+            "disruption_detected": true,
+            "delay_hours": 48,
+            "severity": 72,
+            "severity_breakdown": {
+              "eta_drift": 45,
+              "inventory_risk": 20,
+              "supplier_reliability": 7
+            },
+            "sla_breach_probability": 100,
+            "hours_until_sla": -38
+          }
+        }
+      },
+      "guardrails_post": {
+        "allowed": true,
+        "result": "ALLOWED",
+        "reason": null
+      },
+      "negotiator": {},
+      "treasurer": {},
+      "monitor": {}
+    },
+    "decision_chain": [
+      "Signal: Severity 72/100, Disruption Detected: true",
+      "Root Cause: supplier_delay",
+      "Guardrails (Pre): ALLOWED - Passed",
+      "Options Generated: 3",
+      "Guardrails (Post): ALLOWED - Passed",
+      "Outcome: No viable options generated (Optimization space exhausted) (NO_ACTION_NO_OPTIONS)"
+    ],
+    "decision_type": "NO_ACTION_NO_OPTIONS",
+    "disruption_type": "supplier_delay"
+  }
+]

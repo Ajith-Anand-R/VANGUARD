@@ -1,0 +1,7 @@
+{
+    "warehouse_capacity": 100000,
+    "current_inventory": 45000,
+    "pending_shipments": [
+        "SH-4429"
+    ]
+}

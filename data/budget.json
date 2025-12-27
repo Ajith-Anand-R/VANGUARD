@@ -1,0 +1,188 @@
+{
+  "total_budget": 500000,
+  "emergency_reserve": 50000,
+  "allocated": 36575,
+  "available": 13425,
+  "transactions": [
+    {
+      "transaction_id": "TX-1766862600672",
+      "timestamp": "2025-12-27T19:10:00.672Z",
+      "amount": 2057,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862603099",
+      "timestamp": "2025-12-27T19:10:03.099Z",
+      "amount": 1988,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862605947",
+      "timestamp": "2025-12-27T19:10:05.947Z",
+      "amount": 2129,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862606764",
+      "timestamp": "2025-12-27T19:10:06.764Z",
+      "amount": 2004,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862607795",
+      "timestamp": "2025-12-27T19:10:07.795Z",
+      "amount": 2038,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862608419",
+      "timestamp": "2025-12-27T19:10:08.419Z",
+      "amount": 2034,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862608900",
+      "timestamp": "2025-12-27T19:10:08.900Z",
+      "amount": 1999,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862631780",
+      "timestamp": "2025-12-27T19:10:31.780Z",
+      "amount": 2099,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862634878",
+      "timestamp": "2025-12-27T19:10:34.878Z",
+      "amount": 2076,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862636232",
+      "timestamp": "2025-12-27T19:10:36.232Z",
+      "amount": 1970,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862637167",
+      "timestamp": "2025-12-27T19:10:37.167Z",
+      "amount": 2118,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862641721",
+      "timestamp": "2025-12-27T19:10:41.721Z",
+      "amount": 1966,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862710670",
+      "timestamp": "2025-12-27T19:11:50.670Z",
+      "amount": 2029,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862711462",
+      "timestamp": "2025-12-27T19:11:51.462Z",
+      "amount": 1979,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862712190",
+      "timestamp": "2025-12-27T19:11:52.190Z",
+      "amount": 1967,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862714198",
+      "timestamp": "2025-12-27T19:11:54.198Z",
+      "amount": 2003,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862714717",
+      "timestamp": "2025-12-27T19:11:54.717Z",
+      "amount": 2080,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    },
+    {
+      "transaction_id": "TX-1766862720230",
+      "timestamp": "2025-12-27T19:12:00.230Z",
+      "amount": 2039,
+      "source": "emergency_reserve",
+      "destination": "split_shipment",
+      "shipment_id": "SH-4429",
+      "approved_by": "LossRecoveryAuditor",
+      "executed_by": "Treasurer"
+    }
+  ]
+}

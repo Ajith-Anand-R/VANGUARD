@@ -1,0 +1,15 @@
+{
+  "SH-4429": {
+    "shipment_id": "SH-4429",
+    "origin": "Shanghai Port",
+    "destination": "Los Angeles Warehouse",
+    "original_eta": "2025-01-05T14:00:00Z",
+    "current_eta": "2025-01-07T14:00:00.000Z",
+    "carrier": "split_shipment",
+    "value": 45000,
+    "sla_deadline": "2025-01-06T00:00:00Z",
+    "customer_id": "CUST-8821",
+    "status": "rerouted",
+    "supplier_id": "SUP-001"
+  }
+}

@@ -1,0 +1,5 @@
+{
+    "trigger_threshold": 65,
+    "monitoring_interval_ms": 3000,
+    "enabled": true
+}
