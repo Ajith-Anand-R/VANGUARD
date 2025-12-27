@@ -1,12 +1,11 @@
-import fs from 'fs';
-import path from 'path';
+import { getDataPath } from './storage.js';
 
-const STATE_FILE = './data/system_state.json';
+// Get dynamic path for system state
+const STATE_FILE = getDataPath('system_state.json');
 
-// Ensure data directory exists
-if (!fs.existsSync('./data')) {
-    fs.mkdirSync('./data');
-}
+// Ensure data directory exists logic is handled by storage.js initializeStorage(), 
+// but we just assert paths here basically.
+
 
 // Canonical Phases - The Single Source of Truth for Valid Transitions
 export const PHASES = {

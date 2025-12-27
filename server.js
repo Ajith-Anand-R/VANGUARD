@@ -3,6 +3,10 @@ import cors from 'cors';
 import fs from 'fs';
 import { executeSentinelCheck, processShipmentState, setEventEmitter } from './orchestrator.js';
 import { getSystemState, updateState, PHASES, initShipmentIfMissing } from './stateManager.js';
+import { initializeStorage, getDataPath, getLogPath } from './storage.js';
+
+// Initialize storage (copies seed data if needed)
+initializeStorage();
 
 const app = express();
 app.use(cors());
@@ -82,7 +86,7 @@ app.post('/update-signal', async (req, res) => {
     const { signal_type, value } = req.body;
     let signals = {};
     try {
-        signals = JSON.parse(fs.readFileSync('./data/monitored_signals.json', 'utf8'));
+        signals = JSON.parse(fs.readFileSync(getDataPath('monitored_signals.json'), 'utf8'));
     } catch (e) { /* ignore */ }
 
     if (signal_type === 'port_congestion') {
@@ -94,7 +98,7 @@ app.post('/update-signal', async (req, res) => {
     }
 
     signals.last_updated = new Date().toISOString();
-    fs.writeFileSync('./data/monitored_signals.json', JSON.stringify(signals, null, 2));
+    fs.writeFileSync(getDataPath('monitored_signals.json'), JSON.stringify(signals, null, 2));
 
     // Emit signal update
     sendEventToAll({ type: 'signals_update', signals });
@@ -107,7 +111,7 @@ app.post('/trigger-eta-drift', async (req, res) => {
     const delayHours = req.body.delay_hours || 48;
 
     // 1. Mutate the Signal (Shipment Data)
-    const shipments = JSON.parse(fs.readFileSync('./data/shipments.json', 'utf8'));
+    const shipments = JSON.parse(fs.readFileSync(getDataPath('shipments.json'), 'utf8'));
     const shipment = shipments[shipmentId];
 
     if (!shipment) {
@@ -118,7 +122,7 @@ app.post('/trigger-eta-drift', async (req, res) => {
     const newEta = new Date(originalEta.getTime() + (delayHours * 60 * 60 * 1000));
     shipment.current_eta = newEta.toISOString();
 
-    fs.writeFileSync('./data/shipments.json', JSON.stringify(shipments, null, 2));
+    fs.writeFileSync(getDataPath('shipments.json'), JSON.stringify(shipments, null, 2));
 
     // 2. Set Phase -> AT_RISK via Persistent State Manager
     // This puts it in the queue for the Tick Loop to pick up.
@@ -163,17 +167,17 @@ app.get('/sentinel-check', async (req, res) => {
 });
 
 app.get('/status', (req, res) => {
-    const shipments = JSON.parse(fs.readFileSync('./data/shipments.json', 'utf8'));
-    const budget = JSON.parse(fs.readFileSync('./data/budget.json', 'utf8'));
+    const shipments = JSON.parse(fs.readFileSync(getDataPath('shipments.json'), 'utf8'));
+    const budget = JSON.parse(fs.readFileSync(getDataPath('budget.json'), 'utf8'));
 
     // Safety check for logs
     let logs = [];
     try {
-        logs = JSON.parse(fs.readFileSync('./logs/decisions.log.json', 'utf8'));
+        logs = JSON.parse(fs.readFileSync(getLogPath('decisions.log.json'), 'utf8'));
     } catch (e) { logs = []; }
 
-    const signals = JSON.parse(fs.readFileSync('./data/monitored_signals.json', 'utf8'));
-    const sentinelConfig = JSON.parse(fs.readFileSync('./data/sentinel_config.json', 'utf8'));
+    const signals = JSON.parse(fs.readFileSync(getDataPath('monitored_signals.json'), 'utf8'));
+    const sentinelConfig = JSON.parse(fs.readFileSync(getDataPath('sentinel_config.json'), 'utf8'));
 
     // Read Persistent State
     const systemState = getSystemState();
@@ -190,7 +194,7 @@ app.get('/status', (req, res) => {
 
 app.get('/logs', (req, res) => {
     try {
-        const logs = JSON.parse(fs.readFileSync('./logs/decisions.log.json', 'utf8'));
+        const logs = JSON.parse(fs.readFileSync(getLogPath('decisions.log.json'), 'utf8'));
         res.json(logs);
     } catch (e) {
         res.json([]);
