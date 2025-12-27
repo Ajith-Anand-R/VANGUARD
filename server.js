@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { executeSentinelCheck, processShipmentState, setEventEmitter } from './orchestrator.js';
 import { getSystemState, updateState, PHASES, initShipmentIfMissing } from './stateManager.js';
 import { initializeStorage, getDataPath, getLogPath } from './storage.js';
@@ -8,10 +10,19 @@ import { initializeStorage, getDataPath, getLogPath } from './storage.js';
 // Initialize storage (copies seed data if needed)
 initializeStorage();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('ui'));
+// Serve static files with absolute path
+app.use(express.static(path.join(__dirname, 'ui')));
+
+// Fallback to serve index.html for root
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+});
 
 // --- SSE SETUP ---
 let clients = [];
