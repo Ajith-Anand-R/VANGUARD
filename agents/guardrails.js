@@ -14,11 +14,8 @@ export const guardrails = {
     checkEligibility: async (input) => {
         const { shipment_id, analysis_result, incident_id } = input;
 
-        // 1. Reality Check
+        // 1. Reality Check: Is there actually a disruption?
         if (!analysis_result || !analysis_result.disruption_detected) {
-            // If analysis says no disruption, but we are here, something is odd.
-            // But technically, if no disruption, orchestrator shouldn't have called us.
-            // Assuming Orchestrator calls us regardless:
             return {
                 allowed: false,
                 result: "BLOCKED_FALSE_POSITIVE",
@@ -27,12 +24,21 @@ export const guardrails = {
             };
         }
 
-        // 2. Idempotency Check (Prevent Double Spend)
+        // 2. Meaningful Risk Check (New)
+        if (input.analysis_result && input.analysis_result.severity < 15) {
+            return {
+                allowed: false,
+                result: "BLOCKED_LOW_SEVERITY",
+                reason: `Severity ${input.analysis_result.severity} is below autonomous threshold (15).`,
+                rule_id: "MIN_SEVERITY_THRESHOLD"
+            };
+        }
+
+        // 3. Idempotency Check (Prevent Double Spend)
         try {
             if (fs.existsSync('./logs/decisions.log.json')) {
                 const logs = JSON.parse(fs.readFileSync('./logs/decisions.log.json', 'utf8'));
 
-                // Look for RECENT interventions on same shipment (last 60 mins)
                 const recentIntervention = logs.reverse().find(l =>
                     (l.full_trace?.signal?.shipment_id === shipment_id || l.incident_id?.includes(shipment_id)) &&
                     l.decision_outcome === "INTERVENTION_EXECUTED" &&
@@ -50,15 +56,13 @@ export const guardrails = {
             }
         } catch (e) {
             console.warn("Guardrails Idempotency Check Failed (File Access):", e);
-            // Default to safe open if log read fails? Or Block? 
-            // For safety, we might log warning but allow, or block. 
-            // Let's allow but warn, assuming transient FS issue.
         }
 
         return {
             allowed: true,
             result: "ALLOWED",
-            reason: null
+            reason: "Disruption verified, severity above threshold.",
+            rule_id: "VALID_INCIDENT"
         };
     },
 
@@ -72,44 +76,50 @@ export const guardrails = {
     checkSafety: async (input) => {
         const { options, approved_budget } = input;
 
-        // 1. No Options Check (Should be handled by Orchestrator, but good to double check)
+        // 1. No Options Check 
         if (!options || options.length === 0) {
-            // This isn't really a guardrail block, it's a "No Options" outcome.
-            // However, if we must return a GUARDRAIL_RESULT:
             return {
                 allowed: false,
-                result: "BLOCKED_SAFETY", // Or specific enum if we had one for "No Options"
-                reason: "No options provided to safety check.",
+                result: "BLOCKED_SAFETY",
+                reason: "No feasible options generated.",
                 rule_id: "EMPTY_OPTIONS"
             };
         }
 
-        // 2. Policy: Don't spend more than budget even if negotiator says yes (Defense in depth)
         const budgetLimit = approved_budget || 0;
 
-        // We are checking the *Set* of options. 
-        // If *any* option is valid, we usually ALLOW, and rely on Negotiator to pick the best.
-        // BUT, if ALL options violate critical safety rules, we BLOCK.
+        // 2. STRICT BUDGET CHECK
+        // If the *cheapest* option matches budget but others don't, we can pass,
+        // but if *ALL* options are way over budget, we must BLOCK.
 
-        const strictSafetyCheck = options.every(opt => opt.estimated_cost > budgetLimit * 1.5); // Example: 50% over budget is HARD STOP
+        const cheapestOption = options.reduce((min, o) => o.estimated_cost < min.estimated_cost ? o : min, options[0]);
 
-        if (strictSafetyCheck) {
+        if (cheapestOption.estimated_cost > budgetLimit) {
             return {
                 allowed: false,
-                result: "BLOCKED_POLICY",
-                reason: "All generated options exceed emergency budget cap (150%).",
+                result: "BLOCKED_BUDGET",
+                reason: `Even cheapest option ($${cheapestOption.estimated_cost}) exceeds budget ($${budgetLimit}).`,
                 rule_id: "BUDGET_HARD_CAP"
             };
         }
 
-        // 3. ROI / Value Check (Example: Don't spend $5k to save a $100 shipment)
-        // input.shipment_value would be needed here. 
-        // Assuming we always allow for now unless hard cap hit.
+        // 3. ROI Check
+        // If risk is high and budget is high, blocking might be wise if shipment value is low.
+        // For now, simpler rule:
+        if (options.length === 1 && options[0].confidence < 0.5) {
+            return {
+                allowed: false,
+                result: "BLOCKED_LOW_CONFIDENCE",
+                reason: "Only one option available and confidence is too low (< 0.5).",
+                rule_id: "MIN_CONFIDENCE"
+            };
+        }
 
         return {
             allowed: true,
             result: "ALLOWED",
-            reason: null
+            reason: "Options verified against budget and safety rules.",
+            rule_id: "SAFETY_PASSED"
         };
     }
 };

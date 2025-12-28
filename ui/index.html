@@ -1392,6 +1392,15 @@ ${lastTx.destination}<br>
         const confidence = log.confidence || 0;
         const confColor = confidence >= 0.9 ? '#00ff41' : (confidence >= 0.7 ? '#ffaa00' : '#ff4444');
 
+        const timeStr = new Date(log.timestamp).toLocaleTimeString();
+        let chainHtml = '';
+        if (log.decision_chain && log.decision_chain.length > 0) {
+          chainHtml = `<div class="decision-chain">
+                           <div style="color: #666; font-size: 11px; margin-bottom:5px;">DECISION CHAIN:</div>
+                           ${log.decision_chain.map(step => `<div class="chain-step">› ${step}</div>`).join('')}
+                         </div>`;
+        }
+
         return `
           <div class="decision-entry ${outcome.startsWith('NO_ACTION') || outcome === 'OBSERVED_ONLY' ? 'no-action' : ''} ${outcome === 'FAILURE_INTERNAL' ? 'failure-entry' : ''}">
              

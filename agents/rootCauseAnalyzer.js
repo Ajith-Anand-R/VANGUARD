@@ -10,30 +10,35 @@ export function run(input) {
 
     if (input.delay_hours > 24) {
         if (supplier.reliability_score < 0.8) {
-            rootCause = 'supplier_delay';
+            rootCause = 'SUPPLIER_DELAY';
             causeDetails = `${supplier.name} has reliability score of ${supplier.reliability_score}, delayed production by ${Math.round(input.delay_hours)} hours`;
         } else if (input.delay_hours > 36) {
-            rootCause = 'carrier_failure';
+            rootCause = 'CARRIER_FAILURE';
             causeDetails = `Carrier ${shipment.carrier} experienced significant delays`;
         } else {
-            rootCause = 'route_congestion';
-            causeDetails = `Route from ${shipment.origin} to ${shipment.destination} congested`;
+            rootCause = 'ROUTE_CONGESTION';
+            causeDetails = `Route from ${shipment.origin} to ${shipment.destination} is congested.`;
         }
+    } else if (input.delay_hours > 0) {
+        rootCause = 'MINOR_DELAY';
+        causeDetails = 'Disruption detected but below critical threshold.';
     } else {
-        rootCause = 'minor_delay';
-        causeDetails = 'Minimal disruption detected';
+        rootCause = 'UNKNOWN_DISRUPTION';
+        causeDetails = 'Anomaly detected but cause correlation failed.';
     }
 
-    const detectedCause = rootCause !== 'unknown' ? rootCause : null;
+    // MANDATORY SELECTION: Never let root_cause be undefined.
+    const finalCause = rootCause !== 'unknown' ? rootCause : 'UNKNOWN_DISRUPTION';
+    const confidence = finalCause === 'UNKNOWN_DISRUPTION' ? 0.3 : 0.9;
 
     return {
         timestamp: new Date().toISOString(),
         agent: 'RootCauseAnalyzer',
         shipment_id: input.shipment_id,
-        root_cause: detectedCause || "SUPPLIER_DELAY",
+        root_cause: finalCause,
         cause_details: causeDetails,
-        confidence: detectedCause ? 0.9 : 0.4,
-        fallback_used: !detectedCause,
+        confidence: confidence,
+        fallback_used: finalCause === 'UNKNOWN_DISRUPTION',
         affected_supplier: supplier,
         original_carrier: shipment.carrier,
         previous_data: input

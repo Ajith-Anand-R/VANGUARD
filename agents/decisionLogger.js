@@ -71,6 +71,10 @@ export function run(input) {
         if (monitorData.variance_detected !== undefined) {
             decisionChain.push(`Monitor: Variance Detected? ${monitorData.variance_detected}`);
         }
+    } else if (decisionOutcome.startsWith('NO_ACTION')) {
+        // Explicit logging for non-action
+        decisionChain.push(`Outcome: ${decisionOutcome.replace('NO_ACTION_', 'Blocked: ')}`);
+        decisionChain.push(`Reason: ${negotiationData.rationale || trace.rationale || 'Constraints exceeded.'}`);
     } else {
         decisionChain.push(`Outcome: ${systemAction} (${decisionOutcome})`);
         if (trace.rationale) decisionChain.push(`Rationale: ${trace.rationale}`);

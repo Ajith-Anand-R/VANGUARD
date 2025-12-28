@@ -6,7 +6,7 @@
       "agent": null,
       "context": {
         "signal_analysis": {
-          "timestamp": "2025-12-27T23:42:22.858Z",
+          "timestamp": "2025-12-27T23:59:16.341Z",
           "agent": "SignalMonitor",
           "shipment_id": "SH-4429",
           "shipment": {
@@ -34,7 +34,7 @@
           "hours_until_sla": -38
         },
         "root_cause": {
-          "timestamp": "2025-12-27T23:42:22.858Z",
+          "timestamp": "2025-12-27T23:59:16.341Z",
           "agent": "RootCauseAnalyzer",
           "shipment_id": "SH-4429",
           "root_cause": "supplier_delay",
@@ -51,7 +51,7 @@
           },
           "original_carrier": "split_shipment",
           "previous_data": {
-            "timestamp": "2025-12-27T23:42:22.858Z",
+            "timestamp": "2025-12-27T23:59:16.341Z",
             "agent": "SignalMonitor",
             "shipment_id": "SH-4429",
             "shipment": {
@@ -80,7 +80,7 @@
           }
         },
         "options_data": {
-          "timestamp": "2025-12-27T23:42:26.881Z",
+          "timestamp": "2025-12-27T23:59:20.350Z",
           "agent": "OptionGenerator",
           "shipment_id": "SH-4429",
           "options": [
@@ -125,7 +125,7 @@
           ],
           "options_count": 3,
           "previous_data": {
-            "timestamp": "2025-12-27T23:42:22.858Z",
+            "timestamp": "2025-12-27T23:59:16.341Z",
             "agent": "RootCauseAnalyzer",
             "shipment_id": "SH-4429",
             "root_cause": "supplier_delay",
@@ -142,7 +142,7 @@
             },
             "original_carrier": "split_shipment",
             "previous_data": {
-              "timestamp": "2025-12-27T23:42:22.858Z",
+              "timestamp": "2025-12-27T23:59:16.341Z",
               "agent": "SignalMonitor",
               "shipment_id": "SH-4429",
               "shipment": {
@@ -280,19 +280,19 @@
           }
         },
         "final_log": {
-          "incident_id": "INC-undefined-1766878942858",
-          "timestamp": "2025-12-27T23:42:30.896Z",
+          "incident_id": "INC-undefined-1766879956341",
+          "timestamp": "2025-12-27T23:59:24.368Z",
           "incident_reality": "ACTIVE",
           "guardrail_result": "ALLOWED",
           "decision_outcome": "NO_ACTION_NO_OPTIONS",
           "system_action": "No viable options generated (Optimization space exhausted)",
           "confidence": 1,
           "counterfactual_impact": "N/A",
-          "detection_time": "2025-12-27T23:42:22.858Z",
+          "detection_time": "2025-12-27T23:59:16.341Z",
           "elapsed_seconds": 8,
           "full_trace": {
             "signal": {
-              "timestamp": "2025-12-27T23:42:22.858Z",
+              "timestamp": "2025-12-27T23:59:16.341Z",
               "agent": "SignalMonitor",
               "shipment_id": "SH-4429",
               "shipment": {
@@ -320,7 +320,7 @@
               "hours_until_sla": -38
             },
             "root_cause": {
-              "timestamp": "2025-12-27T23:42:22.858Z",
+              "timestamp": "2025-12-27T23:59:16.341Z",
               "agent": "RootCauseAnalyzer",
               "shipment_id": "SH-4429",
               "root_cause": "supplier_delay",
@@ -337,7 +337,7 @@
               },
               "original_carrier": "split_shipment",
               "previous_data": {
-                "timestamp": "2025-12-27T23:42:22.858Z",
+                "timestamp": "2025-12-27T23:59:16.341Z",
                 "agent": "SignalMonitor",
                 "shipment_id": "SH-4429",
                 "shipment": {
@@ -371,7 +371,7 @@
               "reason": null
             },
             "options": {
-              "timestamp": "2025-12-27T23:42:26.881Z",
+              "timestamp": "2025-12-27T23:59:20.350Z",
               "agent": "OptionGenerator",
               "shipment_id": "SH-4429",
               "options": [
@@ -416,7 +416,7 @@
               ],
               "options_count": 3,
               "previous_data": {
-                "timestamp": "2025-12-27T23:42:22.858Z",
+                "timestamp": "2025-12-27T23:59:16.341Z",
                 "agent": "RootCauseAnalyzer",
                 "shipment_id": "SH-4429",
                 "root_cause": "supplier_delay",
@@ -433,7 +433,7 @@
                 },
                 "original_carrier": "split_shipment",
                 "previous_data": {
-                  "timestamp": "2025-12-27T23:42:22.858Z",
+                  "timestamp": "2025-12-27T23:59:16.341Z",
                   "agent": "SignalMonitor",
                   "shipment_id": "SH-4429",
                   "shipment": {
@@ -495,7 +495,7 @@
         },
         "approved_budget": 6885,
         "auditor_data": {
-          "timestamp": "2025-12-27T23:42:28.884Z",
+          "timestamp": "2025-12-27T23:59:22.361Z",
           "agent": "LossRecoveryAuditor",
           "shipment_id": "SH-4429",
           "financial_analysis": {
@@ -510,7 +510,7 @@
           "budget_approved": 6885,
           "action_recommendation": "INTERVENTION_JUSTIFIED",
           "previous_data": {
-            "timestamp": "2025-12-27T23:42:26.881Z",
+            "timestamp": "2025-12-27T23:59:20.350Z",
             "agent": "OptionGenerator",
             "shipment_id": "SH-4429",
             "options": [
@@ -555,7 +555,7 @@
             ],
             "options_count": 3,
             "previous_data": {
-              "timestamp": "2025-12-27T23:42:22.858Z",
+              "timestamp": "2025-12-27T23:59:16.341Z",
               "agent": "RootCauseAnalyzer",
               "shipment_id": "SH-4429",
               "root_cause": "supplier_delay",
@@ -572,7 +572,7 @@
               },
               "original_carrier": "split_shipment",
               "previous_data": {
-                "timestamp": "2025-12-27T23:42:22.858Z",
+                "timestamp": "2025-12-27T23:59:16.341Z",
                 "agent": "SignalMonitor",
                 "shipment_id": "SH-4429",
                 "shipment": {
@@ -603,7 +603,7 @@
           }
         }
       },
-      "lastUpdated": "2025-12-27T23:42:30.899Z",
+      "lastUpdated": "2025-12-27T23:59:24.370Z",
       "retryCount": 0
     }
   }

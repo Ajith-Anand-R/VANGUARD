@@ -84,16 +84,34 @@ export function run(input) {
 
         // FAILURE MODE: If no viable options
         if (viableOptions.length === 0) {
-            // Collect failure reasons for summary
-            const reasons = [...new Set(scoredOptions.map(o => o.rejectionReason))].join(', ');
+            // Determine specific reason for total failure
+            const reasons = scoredOptions.map(o => o.rejectionReason);
+
+            // Priority Reason (Budget vs SLA)
+            let primaryReason = 'NO_ACTION_GENERIC';
+            let detailedReason = '';
+
+            if (reasons.some(r => r.includes("BUDGET"))) {
+                primaryReason = 'NO_ACTION_BUDGET_EXCEEDED';
+                detailedReason = 'No options fit within the authorized budget.';
+            } else if (reasons.some(r => r.includes("SLA"))) {
+                primaryReason = 'NO_ACTION_SLA_IMPOSSIBLE';
+                detailedReason = 'No options could meet the strict SLA deadline.';
+            } else if (reasons.some(r => r.includes("RISK"))) {
+                primaryReason = 'NO_ACTION_RISK_TOO_HIGH';
+                detailedReason = 'All options exceeded maximum risk threshold.';
+            } else {
+                primaryReason = 'NO_ACTION_NO_VALID_OPTIONS';
+                detailedReason = 'Options generated were invalid or incomplete.';
+            }
 
             return {
                 timestamp: new Date().toISOString(),
                 agent: 'Negotiator',
                 shipment_id: shipmentId,
-                status: 'failure',
-                decision_type: 'FAILURE',
-                rationale: `All options rejected. Reasons: ${reasons}`,
+                status: 'resolved_no_action', // It is resolved, just with no action.
+                decision_type: primaryReason, // EXPLICIT TERMINAL STATE
+                rationale: detailedReason,
                 all_options: scoredOptions,
                 selected_option: null
             };
@@ -105,14 +123,14 @@ export function run(input) {
             timestamp: new Date().toISOString(),
             agent: 'Negotiator',
             shipment_id: shipmentId,
-            decision_type: 'AUTONOMOUS_INTERVENTION', // RENAMED
+            decision_type: 'INTERVENTION_EXECUTED', // Clear success state
             selected_option: {
                 ...bestOption,
                 negotiated_cost: bestOption.estimated_cost
             },
             decision_confidence: bestOption.confidence,
             residual_sla_breach_risk: Number(bestOption.residualRisk),
-            rationale: `Selected ${bestOption.type} (Conf: ${bestOption.confidence}) - Meets Budget & SLA.`,
+            rationale: `Selected ${bestOption.type} (Conf: ${bestOption.confidence}). Meets Budget & SLA.`,
             all_options: scoredOptions
         };
     } catch (error) {
