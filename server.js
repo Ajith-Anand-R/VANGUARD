@@ -217,3 +217,6 @@ app.listen(PORT, () => {
     console.log(`VANGUARD Persistent Server running on http://localhost:${PORT}`);
     console.log(`[SYSTEM] Background Worker started (Tick: 2000ms) with SSE enabled.`);
 });
+
+export default app;
+

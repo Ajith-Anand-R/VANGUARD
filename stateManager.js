@@ -1,3 +1,4 @@
+import fs from 'fs';
 import { getDataPath } from './storage.js';
 
 // Get dynamic path for system state
