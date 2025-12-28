@@ -25,8 +25,8 @@ export function run(input) {
         };
     }
 
-    const budget = JSON.parse(fs.readFileSync('./data/budget.json', 'utf8'));
-    const shipments = JSON.parse(fs.readFileSync('./data/shipments.json', 'utf8'));
+    const budget = JSON.parse(fs.readFileSync(getDataPath('budget.json'), 'utf8'));
+    const shipments = JSON.parse(fs.readFileSync(getDataPath('shipments.json'), 'utf8'));
 
     // --- FIX 2: IDEMPOTENCY CHECK ---
     const existingTransaction = budget.transactions.find(t => t.shipment_id === input.shipment_id);
@@ -80,7 +80,6 @@ export function run(input) {
     };
 
     budget.transactions.push(transaction);
-    fs.writeFileSync('./data/budget.json', JSON.stringify(budget, null, 2));
 
     const shipment = shipments[input.shipment_id];
     const now = new Date();
@@ -96,7 +95,9 @@ export function run(input) {
         shipment.carrier = selectedOption.type;
     }
 
-    fs.writeFileSync('./data/shipments.json', JSON.stringify(shipments, null, 2));
+    // Write updates
+    fs.writeFileSync(getDataPath('budget.json'), JSON.stringify(budget, null, 2));
+    fs.writeFileSync(getDataPath('shipments.json'), JSON.stringify(shipments, null, 2));
 
     return {
         timestamp: new Date().toISOString(),

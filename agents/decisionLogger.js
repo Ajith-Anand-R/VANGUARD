@@ -1,7 +1,13 @@
 import fs from 'fs';
+import { getLogPath } from '../storage.js';
 
 export function run(input) {
-    const logs = JSON.parse(fs.readFileSync('./logs/decisions.log.json', 'utf8'));
+    let logs = [];
+    try {
+        logs = JSON.parse(fs.readFileSync(getLogPath('decisions.log.json'), 'utf8'));
+    } catch (e) {
+        logs = [];
+    }
 
     // --- 3-AXIS CORE DATA ---
     // These specific keys are injected by the Orchestartor/Guardrails in the new flow.
@@ -110,7 +116,7 @@ export function run(input) {
     };
 
     logs.push(logEntry);
-    fs.writeFileSync('./logs/decisions.log.json', JSON.stringify(logs, null, 2));
+    fs.writeFileSync(getLogPath('decisions.log.json'), JSON.stringify(logs, null, 2));
 
     return logEntry;
 }
