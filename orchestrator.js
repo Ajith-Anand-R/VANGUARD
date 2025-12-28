@@ -76,6 +76,19 @@ export async function processShipmentState(shipmentId) {
         return;
     }
 
+    // --- FIX: GLOBAL INVARIANT CHECK ---
+    // If we are "At Risk" but the aggregated risk is actually low (re-calculated or stale),
+    // force stabilization.
+    if (state === PHASES.AT_RISK && context.aggregate_risk && context.aggregate_risk < 50) { // 50 is safe floor
+        console.log(`[ORCHESTRATOR] Invariant Enforced: Risk ${context.aggregate_risk}% < Threshold. Stabilizing.`);
+        updateState(shipmentId, {
+            phase: PHASES.STABILIZED,
+            activeAgent: null,
+            context: { final_decision: 'STABILIZED_LOW_RISK' }
+        });
+        return;
+    }
+
     // Only lock validation states that trigger autonomous chains
     // Passive monitoring states like STABILIZED do not need locks usually, 
     // but if we are "Thinking", we lock.
@@ -110,21 +123,50 @@ export async function processShipmentState(shipmentId) {
             case PHASES.ANALYZING:
                 emit('agent_start', { agent: 'SignalMonitor', shipmentId, phase: PHASES.ANALYZING });
                 const monResult = signalMonitor({ shipment_id: shipmentId, ...context });
-                emit('agent_log', { agent: 'SignalMonitor', log: `Analysis complete. Disruption detected: ${monResult.disruption_detected}` });
+                emit('agent_log', { agent: 'SignalMonitor', log: `Analysis complete. Severity: ${monResult.severity}. Disruption detected: ${monResult.disruption_detected}` });
 
+                // INVARIANT CHECK 1: If no disruption OR severity too low, ABORT.
                 if (!monResult.disruption_detected) {
-                    emit('agent_end', { agent: 'SignalMonitor', status: 'success', shipmentId });
+                    emit('agent_end', { agent: 'SignalMonitor', status: 'success', shipmentId }); // Success means "Successfully determined no issue"
+                    emit('agent_log', { agent: 'System', log: `Invariant Check: Severity ${monResult.severity} below threshold. Stabilizing.` });
+
                     updateState(shipmentId, {
                         phase: PHASES.STABILIZED,
                         activeAgent: null,
-                        context: { analysis: monResult }
+                        context: {
+                            analysis: monResult,
+                            final_decision: 'OBSERVED_ONLY',
+                            final_log: { // Mock log for UI consistency
+                                decision_outcome: 'OBSERVED_ONLY',
+                                decision_type: 'OBSERVED_ONLY',
+                                timestamp: new Date().toISOString(),
+                                incident_id: `INC-${Date.now()}`
+                            }
+                        }
                     });
                     return;
                 }
 
                 const rcResult = rootCauseAnalyzer(monResult);
-                emit('agent_log', { agent: 'RootCauseAnalyzer', log: `Root Cause identified: ${rcResult.root_cause_description}` });
+                emit('agent_log', { agent: 'RootCauseAnalyzer', log: `Root Cause identified: ${rcResult.root_cause} (Conf: ${rcResult.confidence})` });
                 emit('agent_end', { agent: 'SignalMonitor', status: 'issue_detected', shipmentId });
+
+                // INVARIANT CHECK 2: Mandatory Root Cause
+                if (rcResult.root_cause === 'UNKNOWN_DISRUPTION' && rcResult.confidence < 0.4) {
+                    emit('agent_log', { agent: 'System', log: `Invariant Check: Root Cause ambiguous (Confidence ${rcResult.confidence}). Escalation aborted.` });
+
+                    // Log as Observed/Monitor Only
+                    updateState(shipmentId, {
+                        phase: PHASES.STABILIZED,
+                        activeAgent: null,
+                        context: {
+                            analysis: monResult,
+                            root_cause: rcResult,
+                            final_decision: 'OBSERVED_ONLY'
+                        }
+                    });
+                    return;
+                }
 
                 // NEXT: GUARDRAILS PRE-CHECK
                 updateState(shipmentId, {
